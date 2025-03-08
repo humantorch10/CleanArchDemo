@@ -1,0 +1,44 @@
+<div>
+  <mat-toolbar color="primary">
+    <span>My Product Dashboard</span>
+  </mat-toolbar>
+  
+  <div class="container">
+    <mat-card *ngFor="let product of products" class="product-card">
+      <mat-card-title>{{ product.name }}</mat-card-title>
+      <mat-card-content>
+        Price: {{ product.price | currency }}
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="startEdit(product)">Edit</button>
+        <button mat-raised-button color="warn" (click)="deleteProduct(product.id)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  
+
+  <!-- CREATE FORM -->
+  <div>
+    <h3>Add New Product</h3>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="newProductName" placeholder="Name" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="newProductPrice" placeholder="Price" />
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="createProduct()">Create</button>
+  </div>
+
+  <!-- EDIT FORM -->
+  <div *ngIf="editMode">
+    <h3>Edit Product</h3>
+    <mat-form-field>
+      <input matInput type="text" [(ngModel)]="editProductName" placeholder="Name" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" [(ngModel)]="editProductPrice" placeholder="Price" />
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)="saveEdit()">Save</button>
+    <button mat-raised-button color="accent" (click)="cancelEdit()">Cancel</button>
+  </div>
+</div>
